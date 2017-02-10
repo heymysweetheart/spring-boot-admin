@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <!--<form class="form-inline">-->
+    <!--<select ng-model="selectedCluster" ng-options="cluster as cluster for cluster in clusters" ng-disabled="clusters.length <= 1"-->
+      <!--ng-change="startStream()"></select>-->
+  <!--</form>-->
+
+  <sba-info-panel panel-title="Applications Registered">
+    <sba-hystrix-command event-source="applications"></sba-hystrix-command>
+    {{ applications }}
+  </sba-info-panel>
+</div>
