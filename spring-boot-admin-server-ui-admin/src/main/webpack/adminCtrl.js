@@ -23,4 +23,17 @@ module.exports = function ($scope, $http) {
   $http.get('applications').then(function (response) {
     $scope.applications = response;
   });
+
+  function addUser(user) {
+
+  }
+
+
+//  $scope.addUser() = function() {
+//    $http({
+//      url: '/users',
+//      method: 'POST',
+//      data: ''
+//    })
+//  }
 };

@@ -43,7 +43,7 @@ module.exports = {
     new NgAnnotatePlugin({ add: true }),
     new CopyWebpackPlugin([{
       from: '**/*.html',
-      to: 'turbine',
+      to: 'admin',
       context: 'src/main/webpack'
     }
     ], { ignore: ['*.tpl.html'] })

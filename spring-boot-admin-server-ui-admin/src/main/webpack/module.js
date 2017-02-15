@@ -17,7 +17,7 @@
 
 var angular = require('angular');
 
-var module = angular.module('sba-admin', ['sba-applications-hystrix']);
+var module = angular.module('sba-admin', ['sba-core']);
 global.sbaModules.push(module.name);
 
 module.controller('adminCtrl', require('./adminCtrl.js'));
