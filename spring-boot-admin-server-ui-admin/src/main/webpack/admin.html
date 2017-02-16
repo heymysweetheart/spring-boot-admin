@@ -1,54 +1,33 @@
-<div class="container-fluid">
-  <!--<div class="container-fluid" ng-app="adminCtrl">-->
+<div class="container">
   <h3>Spring Boot Admin Panel</h3>
-  <!--<datalist id="allApplications">-->
-    <!--<option ng-repeat="application in $ctrl.applications | orderBy:'toString()'">{{application.applicationName}}</option>-->
-  <!--</datalist>-->
-    <!--<sba-info-panel panel-title="Add users">-->
-      <!--<table class="table">-->
-        <!--<col width="38%" />-->
-        <!--<col width="62%" />-->
-        <!--<tr>-->
-          <!--<td>-->
-            <!--<input type="text" class="input-xlarge" placeholder="user name" ng-model="property.value" />-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--<input type="password" class="input-xlarge" placeholder="password" ng-model="property.value" />-->
-          <!--</td>-->
-          <!--<td>-->
-            <!--<input type="text" class="input-xlarge" placeholder="email" ng-model="property.value" />-->
-          <!--</td>-->
-        <!--</tr>-->
-        <!--<tr class="error" ng-if="$ctrl.error">-->
-          <!--<td colspan="2"><b>Error:</b> {{$ctrl.error}}</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-          <!--<td colspan="2">-->
-            <!--<div class="control-group pull-right">-->
-              <!--<button class="btn btn-success" ng-click="$ctrl.addUser">添加用户</button>-->
-            <!--</div>-->
-          <!--</td>-->
-        <!--</tr>-->
-      <!--</table>-->
-    <!--</sba-info-panel>-->
-
-
   <div>
-    <!--<div ng-controller="adminCtrl as ctrl">-->
   <sba-info-panel panel-title="Add users">
-    <form name="userForm" ng-submit="submit()">
+    <form name="userForm" ng-submit="addUser()">
       <input type="hidden" ng-model="user.id" />
-      <input name="username" type="text" class="input-xlarge" ng-model="user.username" placeholder="user name"
+      <input name="username" type="text" class="input-xlarge" ng-model="user.userName" placeholder="user name"
              required/>
       <input name="password" type="password" class="input-xlarge" ng-model="user.password" placeholder="password"
              required/>
       <input name="email" type="email" ng-model="user.email" placeholder="user email" required/>
-      <span ng-show="!userForm.email.$valid">邮箱有错</span>
-      <!--<input type="submit" class="btn btn-success" ng-disabled="userForm.$invalid"/>-->
+      <span ng-show="!userForm.email.$valid">Email is not valid!</span>
       <input type="submit"  value="Add user" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
     </form>
 
-    {{ users }}
   </sba-info-panel>
+    <sba-info-panel panel-title="Registered users">
+      <ul>
+        <li ng-repeat="user in users">
+          username: {{user.userName}} - email: {{user.email}}
+        </li>
+      </ul>
+    </sba-info-panel>
+
+    <sba-info-panel panel-title="Registered applications">
+      <ul>
+        <li ng-repeat="application in applications">
+          {{application.applicationName}}
+        </li>
+      </ul>
+    </sba-info-panel>
   </div>
 </div>

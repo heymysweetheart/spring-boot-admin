@@ -19,8 +19,38 @@ module.exports = function ($scope, $http) {
   'ngInject';
   $scope.applications = 'default';
   $scope.instances = 'default';
+  $scope.users = 'default';
+
+  /**
+   * Bind the form data with this controller.
+  */
+  var self = this;
+  self.user={id:'',userName:'',password:'',email:'',enabled:1};
 
   $http.get('applications').then(function (response) {
-    $scope.applications = response;
+    $scope.applications = response.data;
   });
+
+  $http.get('instances').then(function (response) {
+    $scope.instances= response.data;
+  });
+
+  $http.get('users').then(function (response) {
+    $scope.users= response.data;
+  });
+
+  /**
+   * Add user controller method.
+  */
+  $scope.addUser = function() {
+    var res = $http.post('/users', JSON.stringify(this.user), {headers: [{'Content-Type': 'application/json'},
+    {'Accept': 'application/json'}]});
+    res.success(function(data, status, headers, config) {
+      alert('Add new user successfully!');
+    });
+    res.error(function(data, status, headers, config) {
+      alert( 'failure message: ' + JSON.stringify({data: data}));
+    });
+  };
 };
+
