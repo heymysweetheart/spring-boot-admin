@@ -1,0 +1,10 @@
+<form name="userForm" ng-submit="addUser()">
+    <input name="userName" type="text" class="input-xlarge" ng-model="user.userName" placeholder="user name"
+           required/>
+    <input name="password" type="password" class="input-xlarge" ng-model="user.password" placeholder="password"
+           required/>
+    <input name="email" required type="email" ng-model="user.email" placeholder="user email"
+           required/>
+    <span ng-show="!userForm.email.$valid">邮箱有错</span>
+    <div class=""><input type="submit" class="btn btn-success" ng-disabled="userForm.$invalid"/></div>
+</form>

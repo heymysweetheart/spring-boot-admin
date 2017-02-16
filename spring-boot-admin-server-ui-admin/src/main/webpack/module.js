@@ -20,8 +20,45 @@ var angular = require('angular');
 var module = angular.module('sba-admin', ['sba-core']);
 global.sbaModules.push(module.name);
 
-module.controller('adminCtrl', require('./adminCtrl.js'));
+//module.controller('adminCtrl', require('./adminCtrl.js'));
+//module.component('userManager', require('./components/userManager.js'));
 
+module.controller('adminCtrl', ['$scope', '$q',function($scope, $q) {
+    var self = this;
+    self.user={id:null,username:'',password:'',email:''};
+
+    function createUser(user){
+        var deferred = $q.defer();
+        $http.post('/users', user)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while creating User');
+                deferred.reject(errResponse);
+            }
+        );
+        return deferred.promise;
+    }
+
+    function submit() {
+        if(self.user.id===null){
+            console.log('Saving New User', self.user);
+            createUser(self.user);
+        }else{
+//            updateUser(self.user, self.user.id);
+            console.log('User updated with id ', self.user.id);
+        }
+        reset();
+    }
+
+    function reset(){
+        self.user={id:null,username:'',password:'',email:''};
+        $scope.userForm.$setPristine(); //reset Form
+    }
+
+}]);
 module.config(function ($stateProvider) {
   $stateProvider.state('admin', {
     url: '/admin',
