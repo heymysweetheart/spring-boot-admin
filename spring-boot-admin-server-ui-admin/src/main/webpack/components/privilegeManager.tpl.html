@@ -1,0 +1,30 @@
+<datalist id="allUsers">
+    <option ng-repeat="user in $ctrl.allUsers| orderBy:'toString()'">{{user.userName}}</option>
+</datalist>
+<table class="table">
+    <col width="38%" />
+    <col width="62%" />
+    <tr ng-repeat="user in $ctrl.allUsers">
+        <td>
+            <input type="text" class="input-xlarge" list="allUsers" placeholder="property name"
+                   ng-model="user.userName" />
+        </td>
+        <td>
+            <input type="text" class="input-xxlarge" placeholder="property value" ng-model="user.email" />
+        </td>
+    </tr>
+    <tr class="error" ng-if="$ctrl.error">
+        <td colspan="2"><b>Error:</b> {{$ctrl.error}}</td>
+    </tr>
+    <!--<tr>-->
+        <!--<td colspan="2">-->
+            <!--<div class="control-group pull-left">-->
+                <!--<button class="btn btn-info" ng-click="$ctrl.refreshContext()">Refresh context</button>-->
+            <!--</div>-->
+            <!--<div class="control-group pull-right">-->
+                <!--<button class="btn btn-warning" ng-click="$ctrl.updateEnvironment()">Update environment</button>-->
+                <!--<button class="btn" ng-click="$ctrl.resetEnvironment()">Reset environment</button>-->
+            <!--</div>-->
+        <!--</td>-->
+    <!--</tr>-->
+</table>

@@ -15,27 +15,18 @@
  */
 'use strict';
 
-var angular = require('angular');
+module.exports = {
 
-var module = angular.module('sba-admin', ['sba-core']);
-global.sbaModules.push(module.name);
+//  $scope.applications = 'default';
+//  $scope.user={id:'',userName:'',password:'',email:'',enabled:1};
+//  $scope.users = [$scope.user];
 
-module.controller('adminCtrl', require('./adminCtrl.js'));
-
-module.component('sbaPrivilegeManager', require('./components/privilegeManager.js'));
-
-module.config(function ($stateProvider) {
-  $stateProvider.state('admin', {
-    url: '/admin',
-    templateUrl: 'admin/admin.html',
-    controller: 'adminCtrl'
-  });
-});
-
-module.run(function (MainViews) {
-  MainViews.register({
-    title: 'Admin',
-    state: 'admin',
-    order: 100
-  });
-});
+  controller: function () {
+    $scope.applications = 'default';
+    $scope.user={id:'',userName:'',password:'',email:'',enabled:1};
+    $scope.users = [$scope.user];
+    var ctrl = this;
+    ctrl.error = null;
+  },
+  template: require('./privilegeManager.tpl.html')
+};

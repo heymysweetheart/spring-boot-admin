@@ -3,31 +3,72 @@
   <div>
   <sba-info-panel panel-title="Add users">
     <form name="userForm" ng-submit="addUser()">
-      <input type="hidden" ng-model="user.id" />
+      <input type="hidden" ng-model="user.userId" />
       <input name="username" type="text" class="input-xlarge" ng-model="user.userName" placeholder="user name"
              required/>
       <input name="password" type="password" class="input-xlarge" ng-model="user.password" placeholder="password"
              required/>
       <input name="email" type="email" ng-model="user.email" placeholder="user email" required/>
-      <span ng-show="!userForm.email.$valid">Email is not valid!</span>
+      <span ng-show="!userForm.email.$valid" style="color:red;">Email is not valid!</span>
+      <br>
       <input type="submit"  value="Add user" class="btn btn-primary btn-sm" ng-disabled="userForm.$invalid">
     </form>
 
   </sba-info-panel>
-    <sba-info-panel panel-title="Registered users">
+  <sba-info-panel panel-title="Registered users">
       <ul>
         <li ng-repeat="user in users">
-          username: {{user.userName}} - email: {{user.email}}
+          id: {{user.userId}} - username: {{user.userName}} - email: {{user.email}}
         </li>
       </ul>
-    </sba-info-panel>
+  </sba-info-panel>
 
-    <sba-info-panel panel-title="Registered applications">
-      <ul>
-        <li ng-repeat="application in applications">
-          {{application.applicationName}}
-        </li>
-      </ul>
-    </sba-info-panel>
+  <sba-info-panel panel-title="Applications management: ">
+      <!--<ul>-->
+        <!--<li ng-repeat="application in applications">-->
+          <!--{{application.applicationName}} - {-->
+        <!--</li>-->
+      <!--</ul>-->
+
+    <form name="myForm" ng-submit="addRoles()">
+      <label for="repeatSelect"> Select one user: </label>
+      <select name="repeatSelect" id="repeatSelectUser" ng-model="userRegistryInfo.userId">
+        <option ng-repeat="targetUser in users" value="{{targetUser.userId}}">{{targetUser.userName}}</option>
+      </select>
+      <div ng-repeat="(key, value) in userRegistryInfo.roles" >
+        <label for="repeatSelect"> Select one application: </label>
+        <select name="repeatSelect" id="repeatSelect" ng-change="change(key,value)" ng-model="key">
+          <option ng-repeat="application in applications" value="{{application.id}}">{{application
+            .applicationName}}</option>
+        </select>
+        {{key}}
+        {{value}}
+
+        <label for="repeatSelect"> Select one role: </label>
+        <!--<select name="repeatSelect" id="repeatSelectRole" ng-change="change(key,value)" ng-model="key">-->
+          <!--<option ng-repeat="application in applications" value="{{application.id}}">{{application-->
+            <!--.applicationName}}</option>-->
+        <!--</select>-->
+        <select name="singleSelect" ng-model="value">
+          <option value="['ROLE_ADMIN','ROLE_USER']">Admin</option>
+          <option value="['ROLE_USER']">User</option>
+        </select>
+
+        <!--Radio button to display the roles.-->
+        <!--<label for="repeatSelect"> Select one role: </label>-->
+        <!--<label>-->
+          <!--<input type="radio" ng-model="value" value=['ROLE_ADMIN','ROLE_USER']" >-->
+          <!--Admin-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input type="radio" ng-model="value" value=['ROLE_USER']>-->
+          <!--User-->
+        <!--</label>-->
+
+        <input type="submit"  value="Allocate Roles" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+      </div>
+    </form>
+
+  </sba-info-panel>
   </div>
 </div>
